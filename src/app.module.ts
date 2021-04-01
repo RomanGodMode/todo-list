@@ -1,26 +1,20 @@
 import { Module } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
-import { TypeOrmModule } from '@nestjs/typeorm'
-import { TodoModule } from "./modules/todo/todo.module";
+import { TodoModule } from './modules/todo/todo.module'
+import { ConfigModule } from '@nestjs/config'
+import { DatabaseModule } from './modules/database/database.module'
 
-const username = process.env.POSTGRES_USER || 'postgres'
-const password = process.env.POSTGRES_PASSWORD || 'postgres'
-//TODO: Заменить на инжекш через конфиг модуль
+const environment = process.env.NODE_ENV || 'development'
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username,
-      password,
-      database: 'postgres',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
+    ConfigModule.forRoot({
+      envFilePath: `.env.${environment}`,
+      isGlobal: true,
     }),
-    TodoModule
+    DatabaseModule,
+    TodoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

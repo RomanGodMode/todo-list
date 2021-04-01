@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { TodoService } from './service/todo.service'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { Todo } from './model/todo.entity'
+import { Todo } from '../database/entities/todo.entity'
 import { TodoController } from './todo.controller'
 import { UniqueTitleConstraint } from './validators/unique-title.validator'
 
