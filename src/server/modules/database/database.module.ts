@@ -8,10 +8,11 @@ import { TypeOrmModule } from '@nestjs/typeorm'
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
+        url: configService.get('DATABASE_URL'),
         host: 'localhost',
         port: 5432,
-        username: configService.get('POSTGRES_USER') || 'postgres',
-        password: configService.get('POSTGRES_PASSWORD' || 'postgres'),
+        username: configService.get('POSTGRES_USER'),
+        password: configService.get('POSTGRES_PASSWORD'),
         database: 'postgres',
         entities: ['dist/modules/database/entities/*.js'],
         synchronize: true,

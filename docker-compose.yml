@@ -1,6 +1,15 @@
 version: '3.1'
 
 services:
+  #  adminer:
+  #    depends_on:
+  #      - db
+  #    networks:
+  #      nesjs-network:
+  #    image: adminer
+  #    restart: always
+  #    ports:
+  #      - 8080:8080
   db:
     image: postgres:11.2
     restart: always
@@ -8,13 +17,56 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
+    networks:
+      - nesjs-network
     volumes:
       - ./db:/var/lib/postgresql/data
       - ./postgresql.conf:/etc/postgresql/postgresql.conf
     ports:
       - 5432:5432
-  adminer:
-    image: adminer
-    restart: always
+  dev:
+    depends_on:
+      - db
+    container_name: nestjs_api_dev
+    build:
+      context: .
+      target: development
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env.development
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+    command: npm run start:debug
     ports:
       - 8080:8080
+    networks:
+      - nesjs-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always
+  prod:
+    depends_on:
+      - db
+    container_name: nestjs_api_prod
+    image: nestjs-api-prod:1.0.0
+    build:
+      context: .
+      target: production
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env.production
+    links:
+      - db
+    command: npm run start:prod
+    ports:
+      - 8080:8080
+    networks:
+      - nesjs-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always
+networks:
+  nesjs-network:
