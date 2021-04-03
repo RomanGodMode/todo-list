@@ -1,15 +1,6 @@
 version: '3.1'
 
 services:
-  #  adminer:
-  #    depends_on:
-  #      - db
-  #    networks:
-  #      nesjs-network:
-  #    image: adminer
-  #    restart: always
-  #    ports:
-  #      - 8080:8080
   db:
     image: postgres:11.2
     restart: always
@@ -20,8 +11,8 @@ services:
     networks:
       - nesjs-network
     volumes:
-      - ./db:/var/lib/postgresql/data
-      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./src/server/db:/var/lib/postgresql/data
+      - ./src/server/postgresql.conf:/etc/postgresql/postgresql.conf
     ports:
       - 5432:5432
   dev:
@@ -31,7 +22,7 @@ services:
     build:
       context: .
       target: development
-      dockerfile: ./Dockerfile
+      dockerfile: src/server/Dockerfile
     env_file:
       - .env.development
     environment:
@@ -43,7 +34,7 @@ services:
     networks:
       - nesjs-network
     volumes:
-      - .:/usr/src/app
+      - ./src/server:/usr/src/app
       - /usr/src/app/node_modules
     restart: always
   prod:
@@ -54,7 +45,7 @@ services:
     build:
       context: .
       target: production
-      dockerfile: ./Dockerfile
+      dockerfile: src/server/Dockerfile
     env_file:
       - .env.production
     links:
@@ -65,7 +56,7 @@ services:
     networks:
       - nesjs-network
     volumes:
-      - .:/usr/src/app
+      - ./src/server:/usr/src/app
       - /usr/src/app/node_modules
     restart: always
 networks:
