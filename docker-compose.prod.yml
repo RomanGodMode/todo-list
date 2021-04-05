@@ -16,7 +16,24 @@ services:
     ports:
       - 5432:5432
 
-  prod:
+  react-client:
+    depends_on:
+      - backend
+    links:
+      - backend
+    build:
+      dockerfile: src/react-client/Dockerfile.prod
+      context: ./src/react-client
+    image: react-client-prod:1.0.0
+    env_file:
+      - .env.production
+    container_name: react_client_prod
+    ports:
+      - 3000:3000
+    environment:
+      BACKEND_URL: backend
+
+  backend:
     depends_on:
       - db
     container_name: nestjs_api_prod
