@@ -24,7 +24,8 @@ services:
     build:
       dockerfile: ./src/react-client/Dockerfile.dev
       context: ./src/react-client
-    image: react-client-dev:1.0.0
+
+    image: react_client_dev:1.0.0
     env_file:
       - .env.development
     container_name: react_client_dev
@@ -32,6 +33,10 @@ services:
       - 3000:3000
     environment:
       BACKEND_URL: backend
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - /app/node_modules
+      - ./src/react-client:/app
 
   backend:
     depends_on:
