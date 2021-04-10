@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.0'
 
 services:
   db:
@@ -13,50 +13,43 @@ services:
     volumes:
       - ./src/server/db:/var/lib/postgresql/data
       - ./src/server/postgresql.conf:/etc/postgresql/postgresql.conf
+    logging:
+      driver: none
     ports:
       - 5432:5432
 
   react-client:
     depends_on:
       - backend
-    networks:
-      - nesjs-network
     build:
-      dockerfile: ./src/react-client/Dockerfile.dev
-      context: ./src/react-client
+      context: ./src/react-client/
+      dockerfile: ./Dockerfile.dev
+    restart: always
+#    image: romangodmode/react_client_dev:1.0.0
 
-    image: react_client_dev:1.0.0
     env_file:
-      - .env.development
+      - ./src/react-client/.env.development
+
     container_name: react_client_dev
     ports:
-      - 3000:3000
-    environment:
-      BACKEND_URL: backend
-      CHOKIDAR_USEPOLLING: "true"
+    - 3000:3000
     volumes:
-      - /app/node_modules
-      - ./src/react-client:/app
+      - ./src/react-client:/usr/src/app/
 
   backend:
     depends_on:
       - db
     container_name: nestjs_api_dev
-    image: nestjs-api-dev:1.0.0
     build:
       context: ./src/server/
-      dockerfile: ./src/server/Dockerfile
-      target: development
+      dockerfile: ./Dockerfile.dev
     env_file:
       - .env.development
-    environment:
-      NODE_ENV: development
-      PORT: 8080
-#    command: npm run start:debug
     ports:
       - 8080:8080
     networks:
       - nesjs-network
+
     volumes:
       - ./src/server:/usr/src/app
       - /usr/src/app/node_modules

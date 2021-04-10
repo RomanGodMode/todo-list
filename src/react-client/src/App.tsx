@@ -1,13 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './shared/styles/App.scss'
+import Header from './components/common/header/header'
+import TodoList from './components/pages/index/todo-list/todo-list'
 
 function App() {
   return (
-    <div className="App">
-      APP
+    <div className='App'>
+      <Header />
+      <TodoList />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

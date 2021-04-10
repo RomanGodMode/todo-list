@@ -1,0 +1,28 @@
+@import '../../../shared/styles/variables';
+.header {
+  //background: $dark-background-color;
+  background: linear-gradient(90deg, rgba(#b43a4d, 1) 20%, rgba(#1de5fd, 1) 100%);
+  .list{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style-type: none;
+    .item{
+      .link{
+        .reactLogo{
+          width: 120px;
+          height: 120px;
+        }
+        .angularLogo{
+          width: 90px;
+          height: 90px;
+        }
+      }
+      .title{
+        color: $light-color;
+        font-size: 40px;
+      }
+    }
+  }
+
+}
