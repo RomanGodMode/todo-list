@@ -13,3 +13,14 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.App{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    .Header{
+        flex: 0 0 auto;
+    }
+    .TodoList{
+        flex: 1 1 auto;
+    }
+}

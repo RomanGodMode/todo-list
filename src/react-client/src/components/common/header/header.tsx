@@ -7,7 +7,7 @@ import s from './header.module.scss'
 
 const Header = () => {
   return (
-    <div className={s.header}>
+    <div className={s.header + ' Header'}>
       <Container>
         <ul className={s.list}>
           <li className={s.item}><Link to={'./react'} className={s.link}>
