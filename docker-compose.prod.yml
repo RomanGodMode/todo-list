@@ -16,19 +16,31 @@ services:
     ports:
       - 5432:5432
 
-  react-client:
+#  react-client:
+#    depends_on:
+#      - backend
+#    restart: always
+#    build:
+#      context: ./src/react-client
+#      dockerfile: ./Dockerfile.prod
+##    image: react-client-prod:1.0.0
+#    env_file:
+#      - ./src/react-client/.env.production
+#    container_name: react_client_prod
+#    ports:
+#      - 3000:3000
+
+  angular-client:
     depends_on:
       - backend
-    restart: always
+    container_name: angular_client_prod
     build:
-      context: ./src/react-client
+      context: ./src/angular-client
       dockerfile: ./Dockerfile.prod
-#    image: react-client-prod:1.0.0
-    env_file:
-      - ./src/react-client/.env.production
-    container_name: react_client_prod
+    restart: always
     ports:
-      - 3000:3000
+      - 4200:80
+
 
   backend:
     depends_on:

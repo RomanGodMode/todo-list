@@ -18,23 +18,37 @@ services:
     ports:
       - 5432:5432
 
-  react-client:
+#  react-client:
+#    depends_on:
+#      - backend
+#    build:
+#      context: ./src/react-client/
+#      dockerfile: ./Dockerfile.dev
+#    restart: always
+##    image: romangodmode/react_client_dev:1.0.0
+#
+#    env_file:
+#      - ./src/react-client/.env.development
+#
+#    container_name: react_client_dev
+#    ports:
+#    - 3000:3000
+#    volumes:
+#      - ./src/react-client:/usr/src/app/
+
+  angular-client:
     depends_on:
       - backend
+    container_name: angular_client_dev
     build:
-      context: ./src/react-client/
+      context: ./src/angular-client
       dockerfile: ./Dockerfile.dev
     restart: always
-#    image: romangodmode/react_client_dev:1.0.0
-
-    env_file:
-      - ./src/react-client/.env.development
-
-    container_name: react_client_dev
     ports:
-    - 3000:3000
+      - 4200:4200
     volumes:
-      - ./src/react-client:/usr/src/app/
+      - /app/node_modules
+      - ./src/angular-client:/app
 
   backend:
     depends_on:
