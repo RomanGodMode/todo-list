@@ -1,0 +1,9 @@
+<div class='todoList' *ngIf=' true; else notTodos'>
+  <todo-item
+    *ngFor='let todo of todoService.todos'
+    [todo]='todo'
+  ></todo-item>
+</div>
+<ng-template #notTodos>
+  <div style='color: #fff;font-size: 20px;'>Пока нет напоминаний</div>
+</ng-template>

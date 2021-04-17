@@ -1,0 +1,4 @@
+<form class='addTodoForm'>
+  <input [formControl]='newTodoTitleInput' type='text'>
+  <button (click)='$event.preventDefault();submitNewTodo()'>Добавить todo</button>
+</form>

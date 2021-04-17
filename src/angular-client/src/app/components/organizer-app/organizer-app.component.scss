@@ -1,0 +1,36 @@
+@import '../../../variables';
+
+.todoListApp {
+  //background: linear-gradient(135deg, rgba(#1de5fd, 1) 0%, rgba(#b43a4d, 1) 30%);
+  background-color: $main-background;
+  flex: 1 1 auto;
+
+  .errorArea {
+    padding-top: 30px;
+    min-height: 80px;
+    padding-left: 49px;
+    text-align: left;
+    font-size: 25px;
+    color: #282c34;
+  }
+
+}
+
+@media only screen and (max-width: 650px) {
+  .errorArea {
+    font-size: 19px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .errorArea {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .errorArea {
+    text-align: center;
+    padding-left: 8px;
+  }
+}

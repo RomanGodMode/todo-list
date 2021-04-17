@@ -1,0 +1,42 @@
+@import 'src/variables';
+.addTodoForm {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+
+  input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid $light-color;
+    outline: none;
+    font-size: 25px;
+    padding: 0;
+    padding-left: 12px;
+    flex-basis: 60%;
+    color: $light-color;
+  }
+
+  button {
+    margin-left: 40px;
+    font-size: 25px;
+    line-height: 2em;
+    padding: 10px;
+    flex-basis: 40%;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .addTodoForm {
+    flex-direction: column;
+
+    input {
+      padding-bottom: 8px;
+    }
+
+    button {
+      margin-top: 20px;
+      margin-left: 0;
+    }
+  }
+}
+

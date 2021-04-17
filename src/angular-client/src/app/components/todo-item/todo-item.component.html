@@ -1,0 +1,15 @@
+<div [ngClass]='{checked: todo.checked, todoItem: true}'>
+  <span (click)='todoService.toggleTodoChecked(todo.id)'
+        *ngIf='!isEdit;else editableTitle'
+        class='title'
+  >{{todo.title}}</span>
+  <ng-template #editableTitle><input [formControl]='updateTodoTitleInput' type='text' class='editableTitle'>
+  </ng-template>
+  <div class='editTodo'>
+    <img (click)='isEdit ? submitAndStopEdit() : toggleIsEdit()' class='pencilIcon' src='./assets/images/draw.svg'
+         alt='Изменить' />
+    <img (click)='todoService.deleteTodo(todo.id)' class='crossIcon' src='./assets/images/close.svg' alt='Удалить' />
+  </div>
+</div>
+
+

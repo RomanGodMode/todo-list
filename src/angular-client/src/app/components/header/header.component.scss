@@ -1,0 +1,73 @@
+@import '../../../variables';
+
+.header {
+  background-color: $main-background;
+  //background: $dark-background-color;
+  //background: linear-gradient(90deg, rgba(#b43a4d, 1) 20%, rgba(#1de5fd, 1) 100%);
+  border-bottom: 2px solid #fff;
+
+  .list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style-type: none;
+
+    .item {
+      .link {
+        .reactLogo {
+          width: 120px;
+          height: 120px;
+        }
+
+        .angularLogo {
+          width: 90px;
+          height: 90px;
+        }
+      }
+
+      .title {
+        color: $light-color;
+        font-size: 40px;
+      }
+    }
+  }
+
+}
+
+@media only screen and (max-width: 500px) {
+  .title {
+    font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .header {
+    .list {
+      .item {
+        .link {
+          img.angularLogo {
+            width: 67px;
+            height: 70px;
+          }
+
+          img.reactLogo {
+            width: 90px;
+            height: 90px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .header {
+    .list {
+      .item {
+        .title {
+          font-size: 25px;
+        }
+      }
+    }
+  }
+}
