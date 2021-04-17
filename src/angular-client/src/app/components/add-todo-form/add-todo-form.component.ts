@@ -15,7 +15,10 @@ export class AddTodoFormComponent implements OnInit {
   newTodoTitleInput!: FormControl
 
   submitNewTodo() {
-    this.todoService.addTodo(this.newTodoTitleInput.value)
+    this.todoService.addTodo(
+      this.newTodoTitleInput.value,
+      () => this.newTodoTitleInput.reset()
+    )
   }
 
   ngOnInit(): void {

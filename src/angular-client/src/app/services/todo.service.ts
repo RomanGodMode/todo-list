@@ -30,10 +30,14 @@ export class TodoService {
       .subscribe((d: any) => this.todos = d, this.handleError)
   }
 
-  addTodo(title: string) {
+  //Это лучший способ что я смог придумать
+  addTodo(title: string, onSuccess?: (newTodo: Todo) => void) {
     this._error.next('')
     this.http.post<Todo>(this.BASE_URL + 'todo', { title })
-      .subscribe(newTodo => this.todos.push(newTodo), this.handleError)
+      .subscribe(newTodo => {
+        this.todos.push(newTodo)
+        onSuccess?.call(this, newTodo) //тут будет неправильный this если не использовать arrowFunc при создании колбека
+      }, this.handleError)
   }
 
   deleteTodo(id: number) {
