@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   backendUrl: `http://localhost:8080`,
-  reactAppUrl: `localhost:3000`
+  reactAppUrl: `http://localhost:3000`
 }
 
 /*
